@@ -13,8 +13,15 @@ months = {
   "December" => 31
 }
 
+=begin
 months.each do |month, days|
   if days == 30
     puts "#{month}: #{days}"
   end
+end
+=end
+
+#UPDATE
+months.each do |month, days|
+  puts "#{month}: #{days}" if days == 30
 end

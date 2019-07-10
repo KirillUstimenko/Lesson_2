@@ -1,13 +1,14 @@
-puts "Введите дату в формате XX.XX.XXXX"
-date = gets.chomp
-day = ( date[0] + date[1] ).to_i
-month = ( date[3] + date[4] ).to_i
-year = ( date[6] + date[7] + date[8] + date[9] ).to_i
+puts "Введите число месяца"
+day = gets.chomp.to_i
+puts "Введите порядковый номер месяца"
+month = gets.chomp.to_i
+puts "Введите год"
+year = gets.chomp.to_i
 
 #Тут логика для определения типа года - високосный / Не високосный 
 if (year % 4 != 0) && (year % 100 != 0) #Если TRUE, то "Год НЕ високосный"
   tipe_year = 28
-elsif (year % 400 == 0) || (year % 4 == 0) #Если FALSE, то "Год ВИСОКОСНЫЙ"
+else (year % 400 == 0) || (year % 4 == 0) #Если FALSE, то "Год ВИСОКОСНЫЙ"
   tipe_year = 29
 end
 
@@ -27,10 +28,13 @@ month_days_hash = {
   12 => 31
 }
 
-i = 0
-date_number = 0
-while i < month - 1 do #берем все месяцы, предшествующие введенному и складываем кол-ва дней каждого
-date_number += month_days_hash[i += 1]
-end
+#i = 0
+#date_number = 0
+#while i < month - 1 do #берем все месяцы, предшествующие введенному и складываем кол-ва дней каждого
+#    date_number += month_days_hash[i += 1]
+#end
+
+#UPDATE
+date_number = month_days_hash.values.take(month - 1).sum
 date_number += day #после подсчета всех дней месяцев, предшествующих введенному, добавляем кол-во дней веденного месяца
 puts "Порядковый номер введенной Вами даты от начала года: #{date_number}"
