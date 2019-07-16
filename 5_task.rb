@@ -6,11 +6,10 @@ puts "Введите год"
 year = gets.chomp.to_i
 
 #Тут логика для определения типа года - високосный / Не високосный 
-tipe_year = 28
 if (year % 4).zero? && (year % 100 != 0 || (year % 400).zero?)
   tipe_year = 29
 else
-  false
+  tipe_year = 28
 end
 
 month_days_hash = {
