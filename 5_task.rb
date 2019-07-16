@@ -6,13 +6,13 @@ puts "Введите год"
 year = gets.chomp.to_i
 
 #Тут логика для определения типа года - високосный / Не високосный 
-if (year % 4 != 0) && (year % 100 != 0) #Если TRUE, то "Год НЕ високосный"
-  tipe_year = 28
-else (year % 400 == 0) || (year % 4 == 0) #Если FALSE, то "Год ВИСОКОСНЫЙ"
+tipe_year = 28
+if (year % 4).zero? && (year % 100 != 0 || (year % 400).zero?)
   tipe_year = 29
+else
+  false
 end
 
-#Hash, где ключ - это порядковый номер месяца, а значение - кол-во дней в данном месяце (с учетом типа года: високосный/не високосный)
 month_days_hash = {
   1 => 31,
   2 => tipe_year,
@@ -27,14 +27,10 @@ month_days_hash = {
   11 => 30,
   12 => 31
 }
-
-#i = 0
-#date_number = 0
-#while i < month - 1 do #берем все месяцы, предшествующие введенному и складываем кол-ва дней каждого
-#    date_number += month_days_hash[i += 1]
-#end
-
-#UPDATE
 date_number = month_days_hash.values.take(month - 1).sum
 date_number += day #после подсчета всех дней месяцев, предшествующих введенному, добавляем кол-во дней веденного месяца
-puts "Порядковый номер введенной Вами даты от начала года: #{date_number}"
+if date_number < 367
+  puts "Порядковый номер введенной Вами даты от начала года: #{date_number}" 
+else
+  puts "Вы ввели некорректную дату"
+end
